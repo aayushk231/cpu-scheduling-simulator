@@ -1,0 +1,552 @@
+/* ============================================================
+   CPU Scheduling Simulator — index.css
+   ============================================================ */
+
+/* ---- Reset & Base ---- */
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+:root {
+  --color-primary: #2563eb;
+  --color-primary-hover: #1d4ed8;
+  --color-danger: #dc2626;
+  --color-danger-hover: #b91c1c;
+  --color-secondary: #6b7280;
+  --color-secondary-hover: #4b5563;
+  --color-success: #16a34a;
+  --color-bg: #f8fafc;
+  --color-surface: #ffffff;
+  --color-border: #e2e8f0;
+  --color-text: #1e293b;
+  --color-text-light: #64748b;
+  --color-error-bg: #fef2f2;
+  --color-error-border: #fecaca;
+  --color-error-text: #991b1b;
+  --color-best: #dcfce7;
+  --radius: 8px;
+  --shadow: 0 1px 3px rgba(0, 0, 0, 0.1), 0 1px 2px rgba(0, 0, 0, 0.06);
+  --shadow-md: 0 4px 6px rgba(0, 0, 0, 0.07), 0 2px 4px rgba(0, 0, 0, 0.06);
+}
+
+body {
+  font-family: 'Segoe UI', system-ui, -apple-system, sans-serif;
+  background-color: var(--color-bg);
+  color: var(--color-text);
+  line-height: 1.6;
+  min-height: 100vh;
+}
+
+/* ---- App Layout ---- */
+.app {
+  max-width: 1100px;
+  margin: 0 auto;
+  padding: 2rem 1.5rem 4rem;
+}
+
+/* ---- Header ---- */
+.app-header {
+  text-align: center;
+  margin-bottom: 2.5rem;
+}
+
+.app-header h1 {
+  font-size: 2rem;
+  font-weight: 700;
+  color: var(--color-primary);
+  margin-bottom: 0.25rem;
+}
+
+.subtitle {
+  color: var(--color-text-light);
+  font-size: 1.05rem;
+  font-style: italic;
+}
+
+/* ---- Sections ---- */
+.section {
+  background: var(--color-surface);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius);
+  padding: 1.5rem;
+  margin-bottom: 1.5rem;
+  box-shadow: var(--shadow);
+}
+
+.section-title {
+  font-size: 1.25rem;
+  font-weight: 600;
+  margin-bottom: 1rem;
+  padding-bottom: 0.5rem;
+  border-bottom: 2px solid var(--color-primary);
+}
+
+/* ---- Buttons ---- */
+.btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0.5rem 1rem;
+  font-size: 0.875rem;
+  font-weight: 500;
+  border-radius: 6px;
+  border: none;
+  cursor: pointer;
+  transition: background-color 0.15s, transform 0.1s;
+}
+
+.btn:hover {
+  transform: translateY(-1px);
+}
+
+.btn:active {
+  transform: translateY(0);
+}
+
+.btn-primary {
+  background-color: var(--color-primary);
+  color: #fff;
+}
+
+.btn-primary:hover {
+  background-color: var(--color-primary-hover);
+}
+
+.btn-secondary {
+  background-color: var(--color-secondary);
+  color: #fff;
+}
+
+.btn-secondary:hover {
+  background-color: var(--color-secondary-hover);
+}
+
+.btn-danger {
+  background-color: var(--color-danger);
+  color: #fff;
+}
+
+.btn-danger:hover {
+  background-color: var(--color-danger-hover);
+}
+
+.btn-run {
+  background-color: var(--color-success);
+  color: #fff;
+  padding: 0.65rem 2rem;
+  font-size: 1rem;
+  font-weight: 600;
+}
+
+.btn-run:hover {
+  background-color: #15803d;
+}
+
+.btn-remove {
+  background: transparent;
+  color: var(--color-danger);
+  font-size: 1.1rem;
+  padding: 0.25rem 0.5rem;
+  border: 1px solid var(--color-danger);
+  border-radius: 4px;
+}
+
+.btn-remove:hover {
+  background-color: var(--color-danger);
+  color: #fff;
+}
+
+/* ---- Table Actions ---- */
+.table-actions {
+  display: flex;
+  gap: 0.5rem;
+  margin-bottom: 1rem;
+  flex-wrap: wrap;
+}
+
+/* ---- Data Table ---- */
+.data-table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 0.9rem;
+}
+
+.data-table th,
+.data-table td {
+  padding: 0.6rem 0.75rem;
+  border: 1px solid var(--color-border);
+  text-align: center;
+}
+
+.data-table th {
+  background-color: #f1f5f9;
+  font-weight: 600;
+  font-size: 0.85rem;
+  text-transform: uppercase;
+  letter-spacing: 0.03em;
+  color: var(--color-text-light);
+}
+
+.data-table tbody tr:hover {
+  background-color: #f8fafc;
+}
+
+.table-input {
+  width: 100%;
+  padding: 0.4rem 0.5rem;
+  border: 1px solid var(--color-border);
+  border-radius: 4px;
+  font-size: 0.875rem;
+  text-align: center;
+  outline: none;
+  transition: border-color 0.15s;
+}
+
+.table-input:focus {
+  border-color: var(--color-primary);
+  box-shadow: 0 0 0 2px rgba(37, 99, 235, 0.15);
+}
+
+.empty-message {
+  color: var(--color-text-light);
+  font-style: italic;
+  padding: 1.5rem !important;
+}
+
+/* ---- Algorithm Selector ---- */
+.algorithm-selector {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+.algorithm-selector-controls {
+  display: flex;
+  gap: 1rem;
+  flex-wrap: wrap;
+  align-items: flex-end;
+}
+
+.select-group {
+  display: flex;
+  flex-direction: column;
+  gap: 0.25rem;
+}
+
+.select-label {
+  font-size: 0.8rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+  color: var(--color-text-light);
+}
+
+.select-input {
+  padding: 0.5rem 0.75rem;
+  border: 1px solid var(--color-border);
+  border-radius: 6px;
+  font-size: 0.9rem;
+  background: #fff;
+  outline: none;
+  min-width: 260px;
+}
+
+.select-input:focus {
+  border-color: var(--color-primary);
+  box-shadow: 0 0 0 2px rgba(37, 99, 235, 0.15);
+}
+
+.quantum-input {
+  padding: 0.5rem 0.75rem;
+  border: 1px solid var(--color-border);
+  border-radius: 6px;
+  font-size: 0.9rem;
+  width: 80px;
+  text-align: center;
+  outline: none;
+}
+
+.quantum-input:focus {
+  border-color: var(--color-primary);
+  box-shadow: 0 0 0 2px rgba(37, 99, 235, 0.15);
+}
+
+/* ---- Algorithm Info ---- */
+.algorithm-info {
+  background-color: #f1f5f9;
+  border-radius: var(--radius);
+  padding: 1rem 1.25rem;
+  margin-top: 0.5rem;
+}
+
+.algorithm-info h3 {
+  font-size: 1.05rem;
+  margin-bottom: 0.5rem;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.badge {
+  display: inline-block;
+  padding: 0.15rem 0.5rem;
+  border-radius: 999px;
+  font-size: 0.7rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+}
+
+.badge-preemptive {
+  background-color: #dbeafe;
+  color: #1e40af;
+}
+
+.badge-nonpreemptive {
+  background-color: #fef9c3;
+  color: #854d0e;
+}
+
+.algorithm-info p {
+  margin-bottom: 0.75rem;
+  font-size: 0.9rem;
+  color: var(--color-text);
+}
+
+.pros-cons {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 1rem;
+}
+
+@media (max-width: 600px) {
+  .pros-cons {
+    grid-template-columns: 1fr;
+  }
+}
+
+.pros-cons h4 {
+  font-size: 0.85rem;
+  margin-bottom: 0.35rem;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+}
+
+.pros-cons ul {
+  list-style: none;
+  padding: 0;
+}
+
+.pros-cons li {
+  font-size: 0.85rem;
+  padding: 0.15rem 0;
+}
+
+.pro-item {
+  color: var(--color-success);
+}
+
+.con-item {
+  color: var(--color-danger);
+}
+
+/* ---- Run Section ---- */
+.run-section {
+  margin-top: 1rem;
+  text-align: center;
+}
+
+/* ---- Error Box ---- */
+.error-box {
+  background-color: var(--color-error-bg);
+  border: 1px solid var(--color-error-border);
+  border-radius: var(--radius);
+  padding: 1rem 1.25rem;
+  margin-bottom: 1.5rem;
+}
+
+.error-box h3 {
+  color: var(--color-error-text);
+  font-size: 1rem;
+  margin-bottom: 0.5rem;
+}
+
+.error-box ul {
+  margin: 0;
+  padding-left: 1.25rem;
+}
+
+.error-box li {
+  color: var(--color-error-text);
+  font-size: 0.875rem;
+  padding: 0.1rem 0;
+}
+
+/* ---- Gantt Chart ---- */
+.gantt-chart {
+  margin-top: 0.5rem;
+}
+
+.gantt-chart-title {
+  font-size: 1rem;
+  margin-bottom: 0.75rem;
+  color: var(--color-text);
+}
+
+.gantt-chart-scroll {
+  overflow-x: auto;
+  padding-bottom: 0.5rem;
+}
+
+.gantt-chart-bars {
+  display: flex;
+  align-items: stretch;
+  min-height: 60px;
+}
+
+.gantt-block {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+  border: 1px solid rgba(0, 0, 0, 0.15);
+  border-radius: 4px;
+  margin-right: 1px;
+  min-height: 56px;
+  transition: opacity 0.15s;
+}
+
+.gantt-block:hover {
+  opacity: 0.85;
+}
+
+.gantt-block-idle {
+  background-image: repeating-linear-gradient(
+    45deg,
+    transparent,
+    transparent 5px,
+    rgba(0, 0, 0, 0.06) 5px,
+    rgba(0, 0, 0, 0.06) 10px
+  );
+}
+
+.gantt-block-label {
+  font-weight: 600;
+  font-size: 0.85rem;
+  color: #fff;
+  text-shadow: 0 1px 2px rgba(0, 0, 0, 0.3);
+}
+
+.gantt-block-idle .gantt-block-label {
+  color: #555;
+  text-shadow: none;
+}
+
+.gantt-block-times {
+  display: flex;
+  justify-content: space-between;
+  width: 100%;
+  padding: 0 4px;
+  position: absolute;
+  bottom: -18px;
+  left: 0;
+  right: 0;
+}
+
+.gantt-time {
+  font-size: 0.7rem;
+  color: var(--color-text-light);
+  font-weight: 500;
+}
+
+.gantt-chart-empty {
+  color: var(--color-text-light);
+  font-style: italic;
+  padding: 1rem 0;
+}
+
+/* Add bottom spacing for time labels */
+.gantt-chart-scroll {
+  padding-bottom: 1.5rem;
+}
+
+/* ---- Metrics Table ---- */
+.metrics-table {
+  margin-bottom: 1.5rem;
+}
+
+/* ---- Summary Metrics ---- */
+.summary-metrics {
+  display: flex;
+  gap: 1rem;
+  flex-wrap: wrap;
+}
+
+.metric-card {
+  flex: 1;
+  min-width: 180px;
+  background: linear-gradient(135deg, #f1f5f9, #e2e8f0);
+  border-radius: var(--radius);
+  padding: 1rem 1.25rem;
+  text-align: center;
+  box-shadow: var(--shadow);
+}
+
+.metric-card-label {
+  font-size: 0.75rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+  color: var(--color-text-light);
+  margin-bottom: 0.25rem;
+}
+
+.metric-card-value {
+  font-size: 1.5rem;
+  font-weight: 700;
+  color: var(--color-primary);
+}
+
+/* ---- Comparison Table ---- */
+.comparison-table {
+  margin-top: 0.5rem;
+}
+
+.best-value {
+  background-color: var(--color-best) !important;
+  font-weight: 700;
+}
+
+/* ---- Responsive ---- */
+@media (max-width: 768px) {
+  .app {
+    padding: 1rem 0.75rem 3rem;
+  }
+
+  .app-header h1 {
+    font-size: 1.5rem;
+  }
+
+  .section {
+    padding: 1rem;
+  }
+
+  .algorithm-selector-controls {
+    flex-direction: column;
+    align-items: stretch;
+  }
+
+  .select-input {
+    min-width: unset;
+    width: 100%;
+  }
+}
+
+.algorithm-info-lists ul {
+  list-style-type: none;
+}
